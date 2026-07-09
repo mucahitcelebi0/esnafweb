@@ -17,7 +17,8 @@ const PROJECTS = [
     url: "https://sushinova.com.tr/",
     display: "sushinova.com.tr",
     desc: "Gel-al sipariş odaklı sushi restoranı sitesi. Menü, konum ve sipariş akışı tek ekranda.",
-    embed: true, live: true
+    embed: false, live: true,
+    screenshot: "images/portfolio/sushinova.jpg"
   },
   {
     name: "Beylikdüzü Çiçekçi",
@@ -26,7 +27,8 @@ const PROJECTS = [
     url: "https://xn--beylikdzieki-rdbbc34ab.com.tr/",
     display: "beylikdüzüçiçekçi.com.tr",
     desc: "\"Aynı gün teslimat\" vurgulu, WhatsApp siparişli çiçekçi sitesi. Google'da bölge aramalarına odaklı.",
-    embed: true, live: true
+    embed: false, live: true,
+    screenshot: "images/portfolio/beylikduzu-cicekci.jpg"
   },
   {
     name: "Vastam Garage",
@@ -45,7 +47,8 @@ const PROJECTS = [
     url: "https://www.karmerotoklima.com/",
     display: "karmerotoklima.com",
     desc: "Oto klima tamiri, gaz dolumu ve yedek parça. Hizmet + güven odaklı kurumsal yapı.",
-    embed: true, live: true
+    embed: false, live: true,
+    screenshot: "images/portfolio/karmer-oto-klima.jpg"
   },
   {
     name: "Başkanlar Auto",
@@ -54,7 +57,8 @@ const PROJECTS = [
     url: "https://www.baskanlarauto.com/",
     display: "baskanlarauto.com",
     desc: "İkinci el araç galerisi: araç vitrini, filtreleme ve hızlı iletişim.",
-    embed: true, live: true
+    embed: false, live: true,
+    screenshot: "images/portfolio/baskanlar-auto.jpg"
   },
   {
     name: "Kardelen Çiçekçilik",
@@ -63,7 +67,8 @@ const PROJECTS = [
     url: "demo/kardelen-cicekcilik/",
     display: "kardelencicekcilik.com (demo)",
     desc: "Buket, aranjman ve çelenk vitrini; adrese servis ve WhatsApp sipariş akışı.",
-    embed: true, live: false
+    embed: false, live: false,
+    screenshot: "images/portfolio/kardelen-cicekcilik.jpg"
   },
   {
     name: "Yakuplu Çiçekçilik",
@@ -72,7 +77,8 @@ const PROJECTS = [
     url: "demo/yakuplu-cicekcilik/",
     display: "yakuplucicekcilik.com (demo)",
     desc: "Buket vitrini, WhatsApp sipariş ve müşteri yorumları odaklı çiçekçi sitesi.",
-    embed: true, live: false
+    embed: false, live: false,
+    screenshot: "images/portfolio/yakuplu-cicekcilik.jpg"
   },
   {
     name: "Armutlu Cam & Ayna",
@@ -81,7 +87,8 @@ const PROJECTS = [
     url: "demo/armutlu-cam/",
     display: "armutlucam.com (demo)",
     desc: "Cam balkon, giyotin cam ve bioklimatik pergole. Proje galerisi ve keşif talebi odaklı.",
-    embed: true, live: false
+    embed: false, live: false,
+    screenshot: "images/portfolio/armutlu-cam.jpg"
   }
 ];
 
@@ -128,10 +135,13 @@ PROJECTS.forEach((p, i) => {
     ? '<span class="pf-tag pf-tag-live">● Yayında</span>'
     : '<span class="pf-tag">Demo</span>';
 
+  const eager = i < 2;
+
   let frameInner;
   if (p.embed) {
     frameInner = `
-      <iframe data-src="${p.url}" loading="lazy" title="${p.name} sitesi önizleme"></iframe>
+      <div class="pf-skeleton" aria-hidden="true"></div>
+      <iframe ${eager ? `src="${p.url}"` : `data-src="${p.url}"`} loading="${eager ? 'eager' : 'lazy'}" fetchpriority="${eager ? 'high' : 'low'}" title="${p.name} sitesi önizleme"></iframe>
       <div class="pf-overlay">
         <button class="btn btn-explore" data-explore>👆 Siteyi Gez</button>
         <a class="btn btn-visit" href="${p.url}" target="_blank" rel="noopener">Yeni Sekmede Aç ↗</a>
@@ -184,6 +194,14 @@ function scaleFrames() {
 window.addEventListener("resize", scaleFrames);
 
 /* --- iframe'leri görünür olunca yükle (performans) --- */
+const hideSkeleton = (iframe) => {
+  const skel = iframe.parentElement.querySelector(".pf-skeleton");
+  if (skel) skel.classList.add("done");
+};
+document.querySelectorAll(".pf-frame-wrap iframe").forEach(iframe => {
+  iframe.addEventListener("load", () => hideSkeleton(iframe), { once: true });
+});
+
 const frameObserver = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (!e.isIntersecting) return;
@@ -195,17 +213,8 @@ const frameObserver = new IntersectionObserver(entries => {
     }
     frameObserver.unobserve(e.target);
   });
-}, { rootMargin: "200px" });
+}, { rootMargin: "800px" });
 document.querySelectorAll("[data-frame]").forEach(el => frameObserver.observe(el));
-
-/* Emniyet: observer tetiklenmese bile 5 sn sonra tüm önizlemeleri yükle */
-setTimeout(() => {
-  document.querySelectorAll("iframe[data-src]").forEach(iframe => {
-    iframe.src = iframe.dataset.src;
-    iframe.removeAttribute("data-src");
-  });
-  scaleFrames();
-}, 5000);
 
 /* --- "Siteyi Gez" etkileşimi --- */
 document.addEventListener("click", e => {
@@ -233,10 +242,19 @@ document.querySelectorAll("[data-mail]").forEach(el => { el.textContent = CONFIG
 /* --- Mobil menü --- */
 const navToggle = document.getElementById("navToggle");
 const mainNav = document.getElementById("mainNav");
-navToggle.addEventListener("click", () => mainNav.classList.toggle("open"));
-mainNav.addEventListener("click", e => {
-  if (e.target.tagName === "A") mainNav.classList.remove("open");
-});
+const navBackdrop = document.getElementById("navBackdrop");
+const setNavOpen = (open) => {
+  mainNav.classList.toggle("open", open);
+  navToggle.classList.toggle("open", open);
+  navBackdrop.classList.toggle("open", open);
+  document.body.classList.toggle("nav-open", open);
+  navToggle.setAttribute("aria-expanded", String(open));
+  document.body.style.overflow = open ? "hidden" : "";
+};
+navToggle.addEventListener("click", () => setNavOpen(!mainNav.classList.contains("open")));
+navBackdrop.addEventListener("click", () => setNavOpen(false));
+mainNav.addEventListener("click", e => { if (e.target.tagName === "A") setNavOpen(false); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") setNavOpen(false); });
 
 /* --- Scroll reveal --- */
 document.querySelectorAll(".why-card, .sector-card, .step, .pf-card").forEach(el => el.classList.add("reveal"));
