@@ -39,7 +39,7 @@ h1 { font-size: clamp(2.2rem, 5.5vw, 4rem); font-weight: 800; }
 h2 { font-size: clamp(1.7rem, 3.6vw, 2.6rem); font-weight: 800; margin-bottom: 14px; }
 .accent { color: var(--accent); }
 
-.section { padding: 96px 0; }
+.section { padding: 96px 0; scroll-margin-top: 72px; }
 .section-alt { background: var(--paper-alt); }
 .section-kicker {
   font-weight: 700; font-size: .82rem; text-transform: uppercase;
@@ -101,12 +101,12 @@ h2 { font-size: clamp(1.7rem, 3.6vw, 2.6rem); font-weight: 800; margin-bottom: 1
   transition: background .35s ease, backdrop-filter .35s ease;
 }
 .nav-backdrop.open {
-  background: rgba(10,8,18,.72);
-  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  background: rgba(15,12,22,.82);
+  backdrop-filter: blur(24px) saturate(140%); -webkit-backdrop-filter: blur(24px) saturate(140%);
   pointer-events: auto;
 }
 body.nav-open .wa-fab { opacity: 0; pointer-events: none; transform: scale(.8); transition: opacity .25s, transform .25s; }
-body.nav-open .site-header { background: rgba(22, 19, 31, 0.35); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
+body.nav-open .site-header { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
 
 /* ---------- Hero ---------- */
 .hero {
@@ -356,11 +356,13 @@ body.nav-open .site-header { background: rgba(22, 19, 31, 0.35); backdrop-filter
 
 /* ---------- Footer ---------- */
 .site-footer { background: #0f0d16; color: rgba(255,255,255,.6); padding: 56px 0 0; font-size: .92rem; }
-.footer-inner { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 40px; padding-bottom: 40px; }
+.footer-inner { display: grid; grid-template-columns: 1.4fr 1fr 1.2fr; gap: 40px; padding-bottom: 40px; }
 .footer-inner p { margin-top: 12px; max-width: 320px; }
 .footer-links b { color: #fff; display: block; margin-bottom: 12px; font-family: var(--font-head); }
 .footer-list { list-style: none; padding: 0; margin: 0; }
 .footer-list li { padding: 5px 0; color: rgba(255,255,255,.6); }
+.footer-list a { color: rgba(255,255,255,.6); transition: color .15s; }
+.footer-list a:hover { color: #fff; }
 .footer-bottom { border-top: 1px solid rgba(255,255,255,.08); padding: 20px 24px; text-align: center; font-size: .84rem; }
 
 /* ---------- WhatsApp FAB ---------- */
@@ -392,17 +394,19 @@ body.nav-open .site-header { background: rgba(22, 19, 31, 0.35); backdrop-filter
   .main-nav {
     display: flex; position: fixed; top: 0; right: 0; bottom: 0; left: 0;
     width: 100%;
-    background: rgba(22, 19, 31, 0.86);
-    backdrop-filter: blur(22px) saturate(140%); -webkit-backdrop-filter: blur(22px) saturate(140%);
-    flex-direction: column; align-items: center; justify-content: safe center;
+    background: transparent;
+    flex-direction: column; align-items: center;
     padding: 88px 28px 32px; gap: 6px; z-index: 100;
     text-align: center;
     overflow-y: auto;
-    transform: translateX(105%);
-    transition: transform .38s cubic-bezier(.4,0,.2,1);
+    opacity: 0; pointer-events: none;
+    transform: translateY(12px);
+    transition: opacity .3s ease, transform .3s ease;
     -webkit-overflow-scrolling: touch;
   }
-  .main-nav.open { transform: translateX(0); }
+  .main-nav.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+  .main-nav a:first-child { margin-top: auto; }
+  .main-nav .nav-cta { margin-bottom: auto; }
   .main-nav a {
     padding: 10px 22px; border-radius: 12px;
     color: rgba(255,255,255,.92); font-size: 1.15rem; font-weight: 600;
@@ -453,3 +457,19 @@ body.nav-open .site-header { background: rgba(22, 19, 31, 0.35); backdrop-filter
 * { -webkit-tap-highlight-color: transparent; }
 .wa-fab { bottom: calc(22px + env(safe-area-inset-bottom, 0px)); right: calc(22px + env(safe-area-inset-right, 0px)); }
 body { padding-bottom: env(safe-area-inset-bottom, 0px); }
+
+/* Klavye erişilebilirliği */
+a:focus-visible, button:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px;
+}
+
+/* Hareket azaltma tercihi */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; }
+}
