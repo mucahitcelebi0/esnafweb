@@ -17,8 +17,7 @@ const PROJECTS = [
     url: "https://sushinova.com.tr/",
     display: "sushinova.com.tr",
     desc: "Gel-al sipariş odaklı sushi restoranı sitesi. Menü, konum ve sipariş akışı tek ekranda.",
-    embed: false, live: true,
-    screenshot: "images/portfolio/sushinova.jpg"
+    embed: true, live: true
   },
   {
     name: "Beylikdüzü Çiçekçi",
@@ -27,8 +26,7 @@ const PROJECTS = [
     url: "https://xn--beylikdzieki-rdbbc34ab.com.tr/",
     display: "beylikdüzüçiçekçi.com.tr",
     desc: "\"Aynı gün teslimat\" vurgulu, WhatsApp siparişli çiçekçi sitesi. Google'da bölge aramalarına odaklı.",
-    embed: false, live: true,
-    screenshot: "images/portfolio/beylikduzu-cicekci.jpg"
+    embed: true, live: true
   },
   {
     name: "Vastam Garage",
@@ -47,8 +45,7 @@ const PROJECTS = [
     url: "https://www.karmerotoklima.com/",
     display: "karmerotoklima.com",
     desc: "Oto klima tamiri, gaz dolumu ve yedek parça. Hizmet + güven odaklı kurumsal yapı.",
-    embed: false, live: true,
-    screenshot: "images/portfolio/karmer-oto-klima.jpg"
+    embed: true, live: true
   },
   {
     name: "Başkanlar Auto",
@@ -57,8 +54,7 @@ const PROJECTS = [
     url: "https://www.baskanlarauto.com/",
     display: "baskanlarauto.com",
     desc: "İkinci el araç galerisi: araç vitrini, filtreleme ve hızlı iletişim.",
-    embed: false, live: true,
-    screenshot: "images/portfolio/baskanlar-auto.jpg"
+    embed: true, live: true
   },
   {
     name: "Kardelen Çiçekçilik",
@@ -67,8 +63,7 @@ const PROJECTS = [
     url: "demo/kardelen-cicekcilik/",
     display: "kardelencicekcilik.com (demo)",
     desc: "Buket, aranjman ve çelenk vitrini; adrese servis ve WhatsApp sipariş akışı.",
-    embed: false, live: false,
-    screenshot: "images/portfolio/kardelen-cicekcilik.jpg"
+    embed: true, live: false
   },
   {
     name: "Yakuplu Çiçekçilik",
@@ -77,8 +72,7 @@ const PROJECTS = [
     url: "demo/yakuplu-cicekcilik/",
     display: "yakuplucicekcilik.com (demo)",
     desc: "Buket vitrini, WhatsApp sipariş ve müşteri yorumları odaklı çiçekçi sitesi.",
-    embed: false, live: false,
-    screenshot: "images/portfolio/yakuplu-cicekcilik.jpg"
+    embed: true, live: false
   },
   {
     name: "Armutlu Cam & Ayna",
@@ -87,8 +81,7 @@ const PROJECTS = [
     url: "demo/armutlu-cam/",
     display: "armutlucam.com (demo)",
     desc: "Cam balkon, giyotin cam ve bioklimatik pergole. Proje galerisi ve keşif talebi odaklı.",
-    embed: false, live: false,
-    screenshot: "images/portfolio/armutlu-cam.jpg"
+    embed: true, live: false
   }
 ];
 

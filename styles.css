@@ -106,7 +106,7 @@ h2 { font-size: clamp(1.7rem, 3.6vw, 2.6rem); font-weight: 800; margin-bottom: 1
   pointer-events: auto;
 }
 body.nav-open .wa-fab { opacity: 0; pointer-events: none; transform: scale(.8); transition: opacity .25s, transform .25s; }
-body.nav-open .site-header { background: var(--dark); backdrop-filter: none; -webkit-backdrop-filter: none; }
+body.nav-open .site-header { background: rgba(22, 19, 31, 0.35); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
 
 /* ---------- Hero ---------- */
 .hero {
@@ -390,13 +390,14 @@ body.nav-open .site-header { background: var(--dark); backdrop-filter: none; -we
   .section { padding: 56px 0; }
   .container { padding: 0 20px; }
   .main-nav {
-    display: flex; position: fixed; top: 0; right: 0; bottom: 0;
-    width: min(82%, 340px); background: var(--dark);
+    display: flex; position: fixed; top: 0; right: 0; bottom: 0; left: 0;
+    width: 100%;
+    background: rgba(22, 19, 31, 0.55);
+    backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
     flex-direction: column; align-items: stretch;
-    padding: 92px 22px 32px; gap: 4px; z-index: 100;
+    padding: 92px 24px 32px; gap: 4px; z-index: 100;
     transform: translateX(105%);
     transition: transform .38s cubic-bezier(.4,0,.2,1);
-    box-shadow: -24px 0 60px rgba(0,0,0,.45);
     -webkit-overflow-scrolling: touch;
   }
   .main-nav.open { transform: translateX(0); }
