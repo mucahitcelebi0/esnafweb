@@ -17,7 +17,8 @@ const PROJECTS = [
     url: "https://sushinova.com.tr/",
     display: "sushinova.com.tr",
     desc: "Gel-al sipariş odaklı sushi restoranı sitesi. Menü, konum ve sipariş akışı tek ekranda.",
-    embed: true, live: true
+    embed: true, live: true,
+    shot: "images/portfolio/sushinova.jpg"
   },
   {
     name: "Beylikdüzü Çiçekçi",
@@ -26,7 +27,8 @@ const PROJECTS = [
     url: "https://xn--beylikdzieki-rdbbc34ab.com.tr/",
     display: "beylikdüzüçiçekçi.com.tr",
     desc: "\"Aynı gün teslimat\" vurgulu, WhatsApp siparişli çiçekçi sitesi. Google'da bölge aramalarına odaklı.",
-    embed: true, live: true
+    embed: true, live: true,
+    shot: "images/portfolio/beylikduzu-cicekci.jpg"
   },
   {
     name: "Vastam Garage",
@@ -45,7 +47,8 @@ const PROJECTS = [
     url: "https://www.karmerotoklima.com/",
     display: "karmerotoklima.com",
     desc: "Oto klima tamiri, gaz dolumu ve yedek parça. Hizmet + güven odaklı kurumsal yapı.",
-    embed: true, live: true
+    embed: true, live: true,
+    shot: "images/portfolio/karmer-oto-klima.jpg"
   },
   {
     name: "Başkanlar Auto",
@@ -54,7 +57,8 @@ const PROJECTS = [
     url: "https://www.baskanlarauto.com/",
     display: "baskanlarauto.com",
     desc: "İkinci el araç galerisi: araç vitrini, filtreleme ve hızlı iletişim.",
-    embed: true, live: true
+    embed: true, live: true,
+    shot: "images/portfolio/baskanlar-auto.jpg"
   },
   {
     name: "Kardelen Çiçekçilik",
@@ -63,7 +67,8 @@ const PROJECTS = [
     url: "demo/kardelen-cicekcilik/",
     display: "kardelencicekcilik.com (demo)",
     desc: "Buket, aranjman ve çelenk vitrini; adrese servis ve WhatsApp sipariş akışı.",
-    embed: true, live: false
+    embed: true, live: false,
+    shot: "images/portfolio/kardelen-cicekcilik.jpg"
   },
   {
     name: "Yakuplu Çiçekçilik",
@@ -72,7 +77,8 @@ const PROJECTS = [
     url: "demo/yakuplu-cicekcilik/",
     display: "yakuplucicekcilik.com (demo)",
     desc: "Buket vitrini, WhatsApp sipariş ve müşteri yorumları odaklı çiçekçi sitesi.",
-    embed: true, live: false
+    embed: true, live: false,
+    shot: "images/portfolio/yakuplu-cicekcilik.jpg"
   },
   {
     name: "Armutlu Cam & Ayna",
@@ -81,7 +87,8 @@ const PROJECTS = [
     url: "demo/armutlu-cam/",
     display: "armutlucam.com (demo)",
     desc: "Cam balkon, giyotin cam ve bioklimatik pergole. Proje galerisi ve keşif talebi odaklı.",
-    embed: true, live: false
+    embed: true, live: false,
+    shot: "images/portfolio/armutlu-cam.jpg"
   }
 ];
 
@@ -120,6 +127,12 @@ if (statsSection) {
 /* --- Portfolyo kartlarını oluştur --- */
 const grid = document.getElementById("portfolioGrid");
 
+/* Mobilde canlı iframe'ler yerine ekran görüntüsü göster:
+   7 dış siteyi açılışta indirmek ağı/CPU'yu boğuyor, sayfa
+   "yarım" açılıyordu. İsteyen "Canlı Önizle" ile iframe'i
+   o an yükler. Masaüstü davranışı değişmedi. */
+const MOBILE = window.matchMedia("(max-width: 720px)").matches;
+
 PROJECTS.forEach((p, i) => {
   const card = document.createElement("article");
   card.className = "pf-card reveal";
@@ -131,7 +144,15 @@ PROJECTS.forEach((p, i) => {
   const eager = i < 2;
 
   let frameInner;
-  if (p.embed) {
+  if (p.embed && MOBILE && p.shot) {
+    frameInner = `
+      <img class="pf-shot" src="${p.shot}" alt="${p.name} web sitesi ana sayfası" loading="${i === 0 ? "eager" : "lazy"}" decoding="async">
+      <div class="pf-overlay">
+        <button class="btn btn-explore" data-live="${p.url}">▶ Canlı Önizle</button>
+        <a class="btn btn-visit" href="${p.url}" target="_blank" rel="noopener">Yeni Sekmede Aç ↗</a>
+      </div>
+      <button class="pf-exit" data-exit>✕ Gezintiyi Bitir</button>`;
+  } else if (p.embed) {
     frameInner = `
       <div class="pf-skeleton" aria-hidden="true"></div>
       <iframe ${eager ? `src="${p.url}"` : `data-src="${p.url}"`} loading="${eager ? 'eager' : 'lazy'}" fetchpriority="${eager ? 'high' : 'low'}" title="${p.name} sitesi önizleme"></iframe>
@@ -204,15 +225,43 @@ const frameObserver = new IntersectionObserver(entries => {
       iframe.removeAttribute("data-src");
       scaleFrames();
     }
+    /* Mobil ekran görüntüleri: tarayıcının lazy sezgisini beklemeden
+       800px kala kesin yükle (hızlı kaydırmada boş kutu kalmasın) */
+    const shot = e.target.querySelector('.pf-shot[loading="lazy"]');
+    if (shot) shot.loading = "eager";
     frameObserver.unobserve(e.target);
   });
 }, { rootMargin: "800px" });
 document.querySelectorAll("[data-frame]").forEach(el => frameObserver.observe(el));
 
-/* --- "Siteyi Gez" etkileşimi --- */
+/* Güvenlik ağı: kritik yükleme bittikten sonra kalan ekran
+   görüntülerini boşta indir — hızlı kaydırmada boş kutu kalmasın */
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    document.querySelectorAll('.pf-shot[loading="lazy"]').forEach(img => { img.loading = "eager"; });
+  }, 2500);
+});
+
+/* --- "Siteyi Gez" / "Canlı Önizle" etkileşimi --- */
 document.addEventListener("click", e => {
   if (e.target.matches("[data-explore]")) {
     e.target.closest(".pf-frame-wrap").classList.add("interactive");
+  }
+  const liveBtn = e.target.closest("[data-live]");
+  if (liveBtn) {
+    const wrap = liveBtn.closest(".pf-frame-wrap");
+    if (!wrap.querySelector("iframe")) {
+      const skel = document.createElement("div");
+      skel.className = "pf-skeleton";
+      const iframe = document.createElement("iframe");
+      iframe.title = "Canlı site önizleme";
+      iframe.addEventListener("load", () => skel.classList.add("done"), { once: true });
+      iframe.src = liveBtn.dataset.live;
+      wrap.prepend(skel);
+      wrap.prepend(iframe);
+      scaleFrames();
+    }
+    wrap.classList.add("has-live", "interactive");
   }
   if (e.target.matches("[data-exit]")) {
     e.target.closest(".pf-frame-wrap").classList.remove("interactive");
@@ -244,7 +293,21 @@ const setNavOpen = (open) => {
   navToggle.setAttribute("aria-expanded", String(open));
   document.body.style.overflow = open ? "hidden" : "";
 };
-navToggle.addEventListener("click", () => setNavOpen(!mainNav.classList.contains("open")));
+/* Dokunuşta anında aç: tarayıcı "click"i bazen iptal ediyor
+   (parmak 1-2px kayınca). pointerup dokunmada garanti ateşlenir;
+   click ise klavye/fare için yedek kalır. */
+const toggleNav = () => setNavOpen(!mainNav.classList.contains("open"));
+let navTapHandled = false;
+navToggle.addEventListener("pointerup", e => {
+  if (e.pointerType === "mouse") return;
+  navTapHandled = true;
+  toggleNav();
+  setTimeout(() => { navTapHandled = false; }, 500);
+});
+navToggle.addEventListener("click", () => {
+  if (navTapHandled) return;
+  toggleNav();
+});
 navBackdrop.addEventListener("click", () => setNavOpen(false));
 mainNav.addEventListener("click", e => { if (e.target.tagName === "A") setNavOpen(false); });
 document.addEventListener("keydown", e => { if (e.key === "Escape") setNavOpen(false); });

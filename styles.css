@@ -197,6 +197,8 @@ body.nav-open .site-header { background: transparent; backdrop-filter: none; -we
   padding: 7px 14px; font-size: .8rem; font-weight: 700; cursor: pointer;
 }
 .pf-frame-wrap.interactive .pf-exit { display: block; }
+.pf-frame-wrap.interactive .pf-overlay { display: none; }
+.pf-frame-wrap.has-live .pf-shot { display: none; }
 
 .pf-shot {
   position: absolute; inset: 0; width: 100%; height: 100%;
@@ -424,6 +426,8 @@ body.nav-open .site-header { background: transparent; backdrop-filter: none; -we
   }
   .nav-toggle { display: flex; margin-left: auto; position: relative; z-index: 110; }
   .header-inner .btn { display: none; }
+  /* Mobilde header blur'u pahalı — opak arka plan yeterli */
+  .site-header { background: rgba(22,19,31,.97); backdrop-filter: none; -webkit-backdrop-filter: none; }
   .hero { padding-top: 60px; }
   .hero-stats { gap: 26px; }
   .btn-xl { padding: 16px 26px; font-size: 1.05rem; }
@@ -454,6 +458,9 @@ body.nav-open .site-header { background: transparent; backdrop-filter: none; -we
   .btn:active, .service-card:active, .sector-card:active, .why-card:active, .pf-card:active {
     transform: scale(.98); transition: transform .1s;
   }
+  /* Dokunmatikte hover yok: portfolyo kart butonları hep görünür olsun */
+  .pf-frame-wrap:not(.interactive) .pf-overlay { background: rgba(22,19,31,.28); }
+  .pf-frame-wrap:not(.interactive) .pf-overlay .btn { opacity: 1; transform: none; }
 }
 * { -webkit-tap-highlight-color: transparent; }
 .wa-fab { bottom: calc(22px + env(safe-area-inset-bottom, 0px)); right: calc(22px + env(safe-area-inset-right, 0px)); }
