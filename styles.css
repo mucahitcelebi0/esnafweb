@@ -84,13 +84,15 @@ h2 { font-size: clamp(1.7rem, 3.6vw, 2.6rem); font-weight: 800; margin-bottom: 1
 .main-nav .nav-cta { display: none; }
 .nav-toggle {
   display: none; background: none; border: none; cursor: pointer;
-  width: 42px; height: 42px; padding: 0;
+  width: 44px; height: 44px; padding: 0;
   flex-direction: column; align-items: center; justify-content: center; gap: 5px;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 .nav-toggle span {
   display: block; width: 22px; height: 2px; background: #fff;
   border-radius: 2px; transition: transform .3s cubic-bezier(.4,0,.2,1), opacity .2s;
+  pointer-events: none;
 }
 .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
