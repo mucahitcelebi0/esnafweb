@@ -4,7 +4,7 @@
 const CONFIG = {
   whatsapp: "905414748916",
   telefon: "0541 474 89 16",
-  email: "muhammetmucahit56@gmail.com",
+  email: "info@esnafweb.com",
   waMesaj: "Merhaba, işletmem için web sitesi yaptırmak istiyorum. Bilgi alabilir miyim?"
 };
 
