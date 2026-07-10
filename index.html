@@ -31,15 +31,74 @@
   {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
+    "@id": "https://esnafweb.com/#business",
     "name": "EsnafWeb",
-    "description": "Küçük işletmelere özel web sitesi tasarımı. İstanbul merkezli; Türkiye ve Avrupa'nın her yerine hizmet.",
+    "description": "Esnaf ve işletmelere özel web sitesi tasarımı. İstanbul merkezli; Türkiye ve Avrupa'nın her yerine hizmet.",
     "url": "https://esnafweb.com",
     "telephone": "+905414748916",
     "email": "info@esnafweb.com",
+    "image": "https://esnafweb.com/images/og-image.jpg",
+    "logo": "https://esnafweb.com/images/apple-touch-icon.png",
     "address": { "@type": "PostalAddress", "addressLocality": "İstanbul", "addressCountry": "TR" },
     "areaServed": ["İstanbul", "Türkiye", "Almanya", "Hollanda", "Fransa"],
     "priceRange": "₺₺",
-    "knowsAbout": ["web tasarım", "local SEO", "küçük işletme web sitesi"]
+    "knowsAbout": ["web tasarım", "local SEO", "küçük işletme web sitesi", "kurumsal web sitesi", "e-ticaret sitesi"],
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "09:00",
+      "closes": "21:00"
+    }],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Web Tasarım Hizmetleri",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Kurumsal Web Sitesi Tasarımı" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Restoran ve Kafe Web Sitesi" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "E-Ticaret Sitesi" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Local SEO ve Google İşletme Profili" } }
+      ]
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Web sitesi fiyatı ne kadar?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "İşletmenize ve ihtiyacınıza göre değişir — tek sayfalık tanıtım sitesi ile sipariş sistemli site aynı fiyat olmaz. İşletmenizi yazın, 48 saat içinde tasarım önerisiyle birlikte net, sürprizsiz bir fiyat gönderiyoruz. Öneri tamamen ücretsizdir."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Web sitesi ne kadar sürede hazır olur?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Onay verdikten sonra ortalama 7 gün içinde siteniz yayında olur. Acil işlerde (kampanya, açılış vb.) daha da hızlanabiliriz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Domain ve hosting işlerinden anlamıyorum, ne olacak?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Hiçbir şeyden anlamanıza gerek yok. Alan adı, hosting, e-posta, Google kaydı — hepsini sizin adınıza biz kuruyoruz. Her şey size ait olur, bize bağımlı kalmazsınız."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Google'da üst sıralara çıkar mıyım?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Her siteyi Google'ın sevdiği teknik altyapıyla ve bölgenize odaklı içerikle kurarız; Google Haritalar kaydınızı da yaparız. Kimse dürüstçe birinci sıra garantisi veremez, ama işletmenizin bölgenizde aranınca bulunması için gereken her şey pakete dahildir."
+        }
+      }
+    ]
   }
   </script>
 </head>
