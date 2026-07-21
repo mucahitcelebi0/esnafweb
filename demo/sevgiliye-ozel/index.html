@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
-<title>Elif & Can — Hikâyemiz 💗</title>
+<title>Tavşan & Tilki — Hikâyemiz 💗</title>
 <meta name="description" content="Sadece ikimize ait, kalıcı bir yer. EsnafWeb örnek çalışması.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -181,7 +181,7 @@
   <!-- HERO -->
   <header class="hero">
     <p class="kick">bizim hikâyemiz</p>
-    <h1>Elif <span class="amp">&amp;</span> Can</h1>
+    <h1>Tavşan <span class="amp">&amp;</span> Tilki</h1>
     <p class="tag">iki kişilik bir dünya, tek bir kalpte.</p>
     <div class="since">
       <div class="n" id="sinceDays">—</div>
@@ -198,7 +198,7 @@
       <div class="memory reveal">
         <div class="photo p3 m-photo"></div>
         <div class="m-text">
-          <div class="m-date">20 Eylül 2023</div>
+          <div class="m-date">6 Ocak 2024</div>
           <h3>İlk karşılaşma</h3>
           <p>O kalabalık kafede tek boş sandalye seninkinin karşısındaydı. "Buraya oturabilir miyim?" dedim. Hayatımın en güzel sorusu.</p>
         </div>
@@ -226,11 +226,11 @@
   <section>
     <h2 class="sec-title reveal">Sana bir <em>mektup</em></h2>
     <div class="letter reveal">
-      <div class="hi">Sevgili Elif,</div>
+      <div class="hi">Sevgili Tavşan,</div>
       <p>Seninle geçen günleri saymayı bıraktım; çünkü artık günleri değil, seninle olmayı sayıyorum. Her sabah aynı heyecanla gözlerimi açıyorum: bugün de sen varsın.</p>
       <p>Bazen kelimeler yetmiyor. O yüzden bu küçük yeri yaptım — sana ne kadar değer verdiğimi, kelimelerin bittiği yerde anlatsın diye.</p>
       <p>İyi ki o kafede karşıma oturmuşsun. İyi ki sen, iyi ki biz.</p>
-      <div class="sign">— hep senin olan, Can</div>
+      <div class="sign">— hep senin olan, Tilki</div>
     </div>
   </section>
 
@@ -263,7 +263,7 @@
 
   <!-- KAPANIŞ -->
   <section class="closing">
-    <h2 class="reveal">Seni seviyorum,<br>Elif.</h2>
+    <h2 class="reveal">Seni seviyorum,<br>Tavşan.</h2>
     <p class="reveal">— ve bu daha başlangıç.</p>
   </section>
 
@@ -318,7 +318,7 @@
   hio.observe(heart);
 
   /* canlı sayaç */
-  const START = new Date('2023-09-20T20:00:00');
+  const START = new Date('2024-01-06T20:00:00');
   const pad = n => String(n).padStart(2, '0');
   function tick() {
     const now = new Date();
@@ -332,8 +332,8 @@
     document.getElementById('cM').textContent = pad(m);
     document.getElementById('cS').textContent = pad(s);
     document.getElementById('sinceDays').textContent = d.toLocaleString('tr-TR');
-    let next = new Date(now.getFullYear(), 8, 20);
-    if (next < now) next = new Date(now.getFullYear() + 1, 8, 20);
+    let next = new Date(now.getFullYear(), 0, 6);
+    if (next < now) next = new Date(now.getFullYear() + 1, 0, 6);
     document.getElementById('anniv').textContent = Math.ceil((next - now) / 86400000);
   }
   tick(); setInterval(tick, 1000);
