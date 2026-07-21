@@ -517,12 +517,12 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   letter-spacing: .22em; color: #ff9bb0; margin-bottom: 18px;
 }
 .gift-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-weight: 600; letter-spacing: -.01em; line-height: 1.14;
-  font-size: clamp(2rem, 4.6vw, 3.3rem); color: #fdeef1; margin-bottom: 20px;
+  font-family: var(--font-head); font-weight: 800;
+  letter-spacing: -.02em; line-height: 1.16;
+  font-size: clamp(1.9rem, 4.4vw, 3rem); color: #fdeef1; margin-bottom: 20px;
 }
 .gift-title em {
-  font-style: italic; font-weight: 600;
+  font-style: normal; font-weight: 800;
   background: linear-gradient(100deg, #ff9bb0, #f5c6a8);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
@@ -532,8 +532,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 /* ---- örnek: kalp şeklinde fotoğraf kolajı ---- */
 .gift-collage-wrap { text-align: center; margin: 0 auto 64px; max-width: 460px; }
 .gift-collage-label {
-  font-family: 'Playfair Display', serif; font-style: italic;
-  color: #ff9bb0; font-size: 1.1rem; margin-bottom: 20px;
+  font-weight: 700; text-transform: uppercase; letter-spacing: .14em;
+  color: #ff9bb0; font-size: .8rem; margin-bottom: 20px;
 }
 .gift-heart {
   display: grid; grid-template-columns: repeat(7, 1fr); gap: 7px;
@@ -596,8 +596,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   58% { transform: scale(1); }
 }
 .gift-collage-cap {
-  font-family: 'Playfair Display', serif; font-style: italic;
-  color: #e6c4cd; font-size: .98rem; line-height: 1.6; margin-top: 22px;
+  color: #e6c4cd; font-size: .96rem; line-height: 1.65; margin-top: 22px;
 }
 
 /* ---- örnek telefon mockup'ları ---- */
@@ -622,9 +621,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   padding: 30px 16px 18px; position: relative;
 }
 .gs-top {
-  font-family: 'Playfair Display', serif; font-style: italic;
-  text-align: center; font-size: .82rem; color: #ff9bb0;
-  letter-spacing: .04em; margin-bottom: 14px;
+  text-align: center; font-size: .72rem; color: #ff9bb0;
+  text-transform: uppercase; letter-spacing: .14em; font-weight: 600; margin-bottom: 14px;
 }
 .gs-photo {
   border-radius: 12px; height: 118px; display: flex; align-items: center; justify-content: center;
@@ -640,25 +638,24 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 /* mektup ekranı */
 .gs-letter { background: linear-gradient(180deg, #241019 0%, #34161f 100%); }
 .gs-letter-body {
-  font-family: 'Playfair Display', serif; color: #f2d6dd;
-  font-size: .82rem; line-height: 1.7; padding: 6px 4px;
+  color: #f2d6dd; font-size: .82rem; line-height: 1.75; padding: 6px 4px;
 }
 .gs-letter-body p { margin-bottom: 11px; }
-.gs-letter-body em { color: #ff9bb0; font-style: italic; }
-.gs-hi { font-size: 1.05rem; font-style: italic; color: #ff9bb0; }
-.gs-sign { text-align: right; font-style: italic; color: #e6b8c2; margin-top: 4px; }
+.gs-letter-body em { color: #ff9bb0; font-style: normal; font-weight: 600; }
+.gs-hi { font-size: 1.02rem; font-weight: 700; color: #ff9bb0; }
+.gs-sign { text-align: right; color: #e6b8c2; margin-top: 4px; }
 
 /* sayaç ekranı */
 .gs-counter { text-align: center; display: flex; flex-direction: column; align-items: center; }
 .gs-count-num {
-  font-family: 'Playfair Display', serif; font-weight: 700;
-  font-size: 3.1rem; line-height: 1; margin-top: 22px;
+  font-family: var(--font-head); font-weight: 800;
+  font-size: 3rem; line-height: 1; margin-top: 22px; letter-spacing: -.02em;
   background: linear-gradient(120deg, #ff9bb0, #f5c6a8);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .gs-count-label { font-size: .84rem; color: #e2bcc7; margin-top: 6px; }
 .gs-divider { color: #ff9bb0; margin: 20px 0 16px; opacity: .7; font-size: 1.1rem; }
-.gs-next { font-family: 'Playfair Display', serif; font-style: italic; color: #ffd9c2; font-size: .92rem; margin-bottom: 12px; }
+.gs-next { color: #ffd9c2; font-size: .88rem; font-weight: 500; margin-bottom: 12px; }
 .gs-count-pills { display: flex; gap: 8px; }
 .gs-count-pills span {
   width: 44px; height: 46px; display: flex; align-items: center; justify-content: center;
@@ -690,8 +687,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 /* ---- hediye vurgusu ---- */
 .gift-gift { max-width: 760px; margin: 0 auto 46px; text-align: center; }
 .gift-gift-lead {
-  font-family: 'Playfair Display', serif; font-style: italic;
-  font-size: 1.25rem; color: #ff9bb0; margin-bottom: 20px;
+  font-family: var(--font-head); font-weight: 700;
+  font-size: 1.15rem; color: #ff9bb0; margin-bottom: 20px;
 }
 .gift-occasions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 24px; }
 .gift-occasions span {
