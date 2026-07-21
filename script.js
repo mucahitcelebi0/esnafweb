@@ -64,10 +64,10 @@ const PROJECTS = [
     name: "Kardelen Çiçekçilik",
     sector: "Çiçekçi",
     city: "Gaziantep · Şehitkamil",
-    url: "demo/kardelen-cicekcilik/",
-    display: "kardelencicekcilik.com (demo)",
+    url: "https://kardelencicekcilik.com.tr/",
+    display: "kardelencicekcilik.com.tr",
     desc: "Buket, aranjman ve çelenk vitrini; adrese servis ve WhatsApp sipariş akışı.",
-    embed: true, live: false,
+    embed: true, live: true,
     shot: "images/portfolio/kardelen-cicekcilik.jpg"
   },
   {
