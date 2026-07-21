@@ -706,7 +706,15 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   box-shadow: 0 14px 38px rgba(255,125,155,.4);
 }
 .gift-btn:hover { box-shadow: 0 20px 46px rgba(255,125,155,.55); transform: translateY(-3px); }
+.gift-btn-demo {
+  background: transparent; color: #ffc4d0; border: 1.5px solid rgba(255,155,176,.5);
+  font-weight: 700; font-size: 1.02rem; padding: 15px 30px; margin-right: 12px;
+}
+.gift-btn-demo:hover { border-color: #ff9bb0; color: #fff; transform: translateY(-3px); }
 .gift-cta-note { display: block; margin-top: 16px; font-size: .92rem; color: #cfa1ae; }
+@media (max-width: 480px) {
+  .gift-btn-demo { margin-right: 0; margin-bottom: 12px; display: block; }
+}
 
 /* ---- nav linki ---- */
 .nav-gift { color: #ff9bb0 !important; font-weight: 600; }
