@@ -154,6 +154,11 @@
   .demo-badge { position: fixed; top: 14px; left: 14px; z-index: 20;
     background: rgba(23,10,18,.8); backdrop-filter: blur(8px); border: 1px solid rgba(255,155,176,.3);
     color: var(--rose-soft); font-size: .72rem; font-weight: 600; padding: 7px 12px; border-radius: 999px; }
+  .tour-btn { position: fixed; bottom: 18px; left: 50%; transform: translateX(-50%); z-index: 30;
+    background: linear-gradient(135deg,#ff7d9b,#f5c6a8); color:#3a1020; border:none; border-radius:999px;
+    padding: 12px 22px; font-weight: 700; font-family: var(--body); font-size: .9rem; cursor: pointer;
+    box-shadow: 0 10px 30px rgba(255,125,155,.45); transition: opacity .3s; }
+  .tour-btn.hidden { opacity: 0; pointer-events: none; }
   .cta { text-align: center; padding: 70px 22px 100px; max-width: 620px; margin: 0 auto; }
   .cta-card { background: linear-gradient(180deg, rgba(255,155,176,.12), rgba(255,155,176,.04));
     border: 1px solid rgba(255,155,176,.28); border-radius: 24px; padding: 40px 28px; }
@@ -177,6 +182,7 @@
   <div class="bg"></div>
   <div class="hearts" id="hearts" aria-hidden="true"></div>
   <div class="demo-badge">✨ Örnek çalışma — Sizinki size özel olur</div>
+  <button class="tour-btn" id="tourBtn">▶ Otomatik Tur (kayıt için)</button>
 
   <!-- HERO -->
   <header class="hero">
@@ -341,6 +347,38 @@
   /* WhatsApp CTA */
   const waMsg = encodeURIComponent('Merhaba! Sevgiliye özel hediye sitesi örneğini gördüm, benimkini yaptırmak istiyorum 💌');
   document.getElementById('waBtn').href = 'https://wa.me/905414748916?text=' + waMsg;
+
+  /* Otomatik sinematik tur — ekran kaydı için (~28 sn) */
+  const tourBtn = document.getElementById('tourBtn');
+  const wait = ms => new Promise(r => setTimeout(r, ms));
+  async function runTour() {
+    tourBtn.classList.add('hidden');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    await wait(3600);                                  // açılış: isimler + sayaç
+    const steps = [
+      ['.timeline .memory:nth-child(1)', 2600],
+      ['.timeline .memory:nth-child(2)', 2600],
+      ['.timeline .memory:nth-child(3)', 2600],
+      ['.letter', 5000],                               // mektup: okunacak kadar
+      ['.counter', 3000],
+      ['.heart', 1400]
+    ];
+    for (const [sel, d] of steps) {
+      const el = document.querySelector(sel);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      await wait(d);
+    }
+    // kalp karelerini sırayla çevir (vurucu an)
+    const tiles = [...document.querySelectorAll('#heart .h')];
+    [3, 10, 17, 24, 12].forEach((i, k) => setTimeout(() => tiles[i] && tiles[i].classList.add('flipped'), k * 380));
+    await wait(3000);
+    document.querySelector('.closing').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    await wait(4200);                                  // kapanış: "Seni seviyorum"
+    tiles.forEach(t => t.classList.remove('flipped'));
+    tourBtn.classList.remove('hidden');
+  }
+  tourBtn.addEventListener('click', runTour);
+  if (location.hash === '#tur') setTimeout(runTour, 700);
 </script>
 </body>
 </html>
