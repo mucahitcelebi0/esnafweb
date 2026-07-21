@@ -276,6 +276,15 @@ document.querySelectorAll("[data-wa]").forEach(el => {
   el.rel = "noopener";
 });
 
+/* Sevgiliye özel hediye sitesi — ayrı, duygusal ön mesaj */
+const waGiftMesaj = "Merhaba, sevgilime/eşime özel bir hediye sitesi yaptırmak istiyorum. Bilgi ve fiyat alabilir miyim?";
+const waGiftUrl = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(waGiftMesaj)}`;
+document.querySelectorAll("[data-wa-gift]").forEach(el => {
+  el.href = waGiftUrl;
+  el.target = "_blank";
+  el.rel = "noopener";
+});
+
 /* --- Telefon & e-posta --- */
 document.querySelectorAll("[data-tel]").forEach(el => (el.textContent = CONFIG.telefon));
 document.querySelectorAll("[data-tel-link]").forEach(el => (el.href = `tel:+90${CONFIG.telefon.replace(/\s/g, "").slice(1)}`));
