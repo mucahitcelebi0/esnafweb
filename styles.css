@@ -529,6 +529,48 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .gift-sub { font-size: 1.1rem; line-height: 1.75; color: #e6c4cd; }
 .gift-sub strong { color: #ffd9c2; font-weight: 600; }
 
+/* ---- örnek: kalp şeklinde fotoğraf kolajı ---- */
+.gift-collage-wrap { text-align: center; margin: 0 auto 64px; max-width: 460px; }
+.gift-collage-label {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  color: #ff9bb0; font-size: 1.1rem; margin-bottom: 20px;
+}
+.gift-heart {
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 7px;
+  width: 100%; max-width: 380px; margin: 0 auto;
+}
+.gift-heart i { aspect-ratio: 1; visibility: hidden; }
+.gift-heart .ph {
+  aspect-ratio: 1; border-radius: 8px; position: relative; overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.08), 0 4px 12px rgba(20,6,14,.35);
+  opacity: 0; transform: scale(.3) translateY(8px);
+  transition: opacity .5s ease, transform .6s cubic-bezier(.34,1.56,.64,1);
+}
+.gift-heart .ph::after {
+  content: "♥"; position: absolute; inset: 0; display: flex;
+  align-items: center; justify-content: center;
+  color: rgba(255,255,255,.22); font-size: 13px;
+}
+.gift-heart.in .ph { opacity: 1; transform: none; }
+.gift-heart.in { animation: giftBeat 2.8s ease-in-out 1.6s infinite; }
+/* fotoğraf gradient çeşitleri */
+.gift-heart .ph:nth-of-type(5n+1) { background: linear-gradient(135deg, #6b3550, #c98fa8); }
+.gift-heart .ph:nth-of-type(5n+2) { background: linear-gradient(135deg, #35304f, #a85b8e); }
+.gift-heart .ph:nth-of-type(5n+3) { background: linear-gradient(135deg, #7a3b4d, #e0a68f); }
+.gift-heart .ph:nth-of-type(5n+4) { background: linear-gradient(135deg, #4a2338, #ff9bb0); }
+.gift-heart .ph:nth-of-type(5n+5) { background: linear-gradient(135deg, #5a2b45, #d99a8f); }
+@keyframes giftBeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.035); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.055); }
+  58% { transform: scale(1); }
+}
+.gift-collage-cap {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  color: #e6c4cd; font-size: .98rem; line-height: 1.6; margin-top: 22px;
+}
+
 /* ---- örnek telefon mockup'ları ---- */
 .gift-showcase {
   display: flex; justify-content: center; align-items: flex-end;

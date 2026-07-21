@@ -333,6 +333,19 @@ const revealObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.08 });
 document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
 
+/* --- Kalp kolajı: görünür olunca parçalar sırayla belirir --- */
+const giftHeart = document.getElementById("giftHeart");
+if (giftHeart) {
+  const tiles = giftHeart.querySelectorAll(".ph");
+  tiles.forEach((t, i) => { t.style.transitionDelay = (i * 0.045).toFixed(3) + "s"; });
+  const heartObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { giftHeart.classList.add("in"); heartObs.unobserve(giftHeart); }
+    });
+  }, { threshold: 0.3 });
+  heartObs.observe(giftHeart);
+}
+
 /* --- Yıl --- */
 document.getElementById("year").textContent = new Date().getFullYear();
 
